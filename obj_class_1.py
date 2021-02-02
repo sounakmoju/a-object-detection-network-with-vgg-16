@@ -21,7 +21,7 @@ data_jpg=[]
 data_xml=[]
 train_images=[]
 train_labels=[]
-path=r'C:\Users\sounak\Downloads\reasearch\vgg_app_1\apple'
+path=r'C:\Downloads\reasearch\vgg_app_1\apple'
 
 for filename in os.listdir(path):
     if filename.split('.')[1] == 'jpg':
@@ -41,8 +41,8 @@ object_xmax=[]
 object_ymax=[]
 gt_values=[]
 
-for i in range(len(data_xml)):
-    root_=parse(data_xml[i])
+for me in range(len(data_xml)):
+    root_=parse(data_xml[me])
     root=root_.getroot()
     objects = root.findall("object")
     object_xmin.append([int(x.find("bndbox").findtext("xmin")) for x in objects])
@@ -51,20 +51,20 @@ for i in range(len(data_xml)):
     object_ymax.append([int(x.find("bndbox").findtext("ymax")) for x in objects])
 
 
-#print(object_xmin[i])
+#print(object_xmin[me])
 import cv2
 import matplotlib.pyplot as plt
-for i in range(len(data_jpg)):
-    img = cv2.imread(str(data_jpg[i]))
+for me in range(len(data_jpg)):
+    img = cv2.imread(str(data_jpg[me]))
     #img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    for j in range(len(object_xmin[i])):
-        #print(object_ymin[i][j])
-        #gt_values[0]=object_xmin[i][j]
-        ##gt_values[1]=object_ymin[i][j]
-        #gt_values[2]=object_xmax[i][j]
-        #gt_values[3]=object_ymax[i][j]
-        #gt_values.append({"x1":object_xmin[i][j],object_ymin[i][j],object_xmax[i][j],object_ymax[i][j]}
-        gt_values=({"x1":object_xmin[i][j],"x2":object_xmax[i][j],"y1":object_ymin[i][j],"y2":object_ymax[i][j]})
+    for j in range(len(object_xmin[me])):
+        #print(object_ymin[me][j])
+        #gt_values[0]=object_xmin[me][j]
+        ##gt_values[1]=object_ymin[me][j]
+        #gt_values[2]=object_xmax[me][j]
+        #gt_values[3]=object_ymax[me][j]
+        #gt_values.append({"x1":object_xmin[me][j],object_ymin[me][j],object_xmax[me][j],object_ymax[me][j]}
+        gt_values=({"x1":object_xmin[me][j],"x2":object_xmax[me][j],"y1":object_ymin[me][j],"y2":object_ymax[me][j]})
         #print(gt_values)
     ss.setBaseImage(img)
     ss.switchToSelectiveSearchFast()
